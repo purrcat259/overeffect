@@ -1,0 +1,16 @@
+body {
+	margin: 0 auto;
+}
+
+a {
+	text-decoration: none;
+	color: blue;
+}
+
+.box {
+	float: left;
+	padding: 3em;
+	margin: 3em;
+	background-color: orange;
+	border-radius: 20px;
+}

@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+{% block content %}
+    <div>
+        <h1 style="text-align: center;">Control Panel</h1>
+        <a href="{{ url_for('overlay') }}" class="box" target="_blank">Overlay page</a>
+        {% for file in files %}
+            <a href="{{ url_for('request_state', new_state='request', new_file=file)}}" class="box" >Play: {{ file }}</<a>
+        {% endfor %}
+        <a href="{{ url_for('request_state', new_state='ready', new_file='none')}}" class="box" >Return to ready state</a>
+    </div>
+{% endblock %}
