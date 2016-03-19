@@ -1,8 +1,12 @@
 {% extends "layout.html" %}
+{% block head %}
+
+{% endblock %}
 {% block content %}
     <h1>OVERLAY PAGE</h1>
     <div><span>Currently playing: </span><span id="content"></span></div>
     <audio id="overlayAudio" src=""></audio>
     <img id="overlayImage" src="" width="0%" height="0%" />
-    <script src="./static/check_state.js"></script>
+    <!--<img id="testGif" src="./static/assets/KateWin.gif" />-->
+    <script type="text/javascript" src="./static/check_state.js"></script>
 {% endblock %}
