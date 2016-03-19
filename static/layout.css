@@ -1,16 +1,24 @@
 body {
 	margin: 0 auto;
+	color: red;
+	background-color: black;
 }
 
 a {
 	text-decoration: none;
-	color: blue;
+}
+
+a:hover {
+	color: green;
+	text-decoration: none;
 }
 
 .box {
-	float: left;
 	padding: 3em;
+	display: block;
 	margin: 3em;
+	color: white;
+	text-align: center;
 	background-color: orange;
-	border-radius: 20px;
+	border-radius: 50px;
 }
