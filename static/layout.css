@@ -13,12 +13,6 @@ a:hover {
 	text-decoration: none;
 }
 
-.box {
-	padding: 3em;
-	display: block;
-	margin: 3em;
-	color: white;
-	text-align: center;
-	background-color: orange;
-	border-radius: 50px;
+.option-row {
+	padding: 1em;
 }
