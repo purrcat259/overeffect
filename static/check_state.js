@@ -14,7 +14,8 @@ time = setInterval(function(){
             var file_format = requested_file.split(".")[requested_file.split(".").length - 1];
             var file_timeout = split_string[2] * 1000;
             // Set the state to busy
-            $.get("http://127.0.0.1:5000/set_busy_state");
+            var busy_url = "http://127.0.0.1:5000/set_busy_state/" + requested_file;
+            $.get(busy_url);
 						$("#content").empty();
 						requested_file = "/static/assets/" + requested_file;
 						$("#content").append(requested_file);
@@ -22,7 +23,7 @@ time = setInterval(function(){
 						var is_audio = (audio_types.indexOf(file_format) > -1);
 						var is_image = (image_types.indexOf(file_format) > -1);
 						var is_video = (video_types.indexOf(file_format) > -1);
-						var is_gif = (file_format.indexOf(".gif") > -1);
+						var is_gif = (requested_file.indexOf(".gif") > -1);
 						// Act according to the file type
 						if (is_audio) {
 								// Hide the visual
@@ -37,8 +38,6 @@ time = setInterval(function(){
 										$.get("http://127.0.0.1:5000/reset_state");
 								});
 						} else if (is_gif) {
-								// Stopping the interval first
-								//clearInterval(time);
 								// Show the gif
 								$("#overlayImage").attr("width", "100%");
 								// If gif
