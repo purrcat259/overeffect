@@ -48,11 +48,11 @@ def request_state(new_state, new_file, time_out):
     return redirect(url_for('control_panel'))
 
 
-@app.route('/set_busy_state')
-def set_busy():
-    print('Now busy showing something')
+@app.route('/set_busy_state/<something>')
+def set_busy(something):
+    print('Now busy showing {}'.format(something))
     global state
-    state = 'busy:busy:busy'
+    state = 'busy:{}:busy'.format(something)
     return ''
 
 
