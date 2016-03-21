@@ -5,29 +5,34 @@
 {% endblock %}
 {% block content %}
     <div class="container">
-        <h1 style="text-align: center;">Control Panel</h1>
+        <h1 style="text-align: center;">Overeffect Control Panel</h1>
+        <h2>Media</h2>
+        {% for file in files_data %}
+            <div class="row option-row">
+                <a href="{{ url_for('request_state', new_state='request', new_file=file, time_out=5) }}" class="btn btn-info">
+                    <i class="fa fa-play fa-2x">&nbsp;  {{ file.full_name }} : {{ file.duration }}s</i>
+                </a>
+            </div>
+        {% endfor %}
+        <!-- Generic controls at the bottom -->
         <div class="center-block">
-            <a href="{{ url_for('overlay') }}" class="box" target="_blank">Overlay page</a>
+            <h2>Controls</h2>
         </div>
-        <table class="table table-striped">
-            <tr>
-                <th>Filename</th>
-                <th>Controls</th>
-                <th>Length</th>
-            </tr>
-            {% for file in files_data %}
-                <tr>
-                    <td>{{ file }}</td>
-                    <td>
-                        <!-- Play Button -->
-                        <!-- TODO: Specify timeout for both -->
-                        <a href="{{ url_for('request_state', new_state='request', new_file=file, time_out=5) }}" class="btn btn-success"><i class="fa fa-play fa-3x"></i></a>
-                        <!-- Stop Button -->
-                        <a href="{{ url_for('request_state', new_state='ready', new_file='none', time_out=5) }}" class="btn btn-danger"><i class="fa fa-stop fa-3x"></i></a>
-                    </td>
-                    <td>{{ files_data[file] }} seconds</td>
-                </tr>
-            {% endfor %}
-        </table>
+        <div class="row option-row">
+            <a href="{{ url_for('overlay') }}" class="btn btn-warning" target="_blank">Overlay page</a>
+        </div>
+        <div class="row option-row">
+            <a href="{{ url_for('rebuild_filelist') }}" class="btn btn-success" id="refreshButton"><i class="fa fa-refresh"></i> Refresh List</a>
+        </div>
+        <div class="row option-row">
+            <!-- TODO: Add reset button for static media -->
+            <!--
+            <a href="#" class="btn btn-danger"><i class="fa fa-stop"></i> Reset Media</a>
+            -->
+        </div>
+        <!-- Shameless plug -->
+        <div class="row option-row">
+            <h3>Made by Purrcat. Meow.</h3>
+        </div>
     </div>
 {% endblock %}
