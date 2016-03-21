@@ -19,13 +19,30 @@ time = setInterval(function(){
 						$("#content").empty();
 						requested_file = "/static/assets/" + requested_file;
 						$("#content").append(requested_file);
+						// TODO: Put these in their own functions, but hey, it works for now
 						// Determine if it is audio, a gif, an image or a video
-						var is_audio = (audio_types.indexOf(file_format) > -1);
-						var is_image = (image_types.indexOf(file_format) > -1);
-						var is_video = (video_types.indexOf(file_format) > -1);
+						var is_audio = false;
+						var is_image = false;
+						var is_video = false;
+						$.each(audio_types, function(index, value) {
+								if (requested_file.indexOf(value) > -1) {
+										is_audio = true;
+								}
+						});
+						var is_image = $.each(image_types, function(index, value) {
+								if (requested_file.indexOf(value) > -1) {
+										is_image = true;
+								}
+						});
+						var is_video = $.each(video_types, function(index, value) {
+								if (requested_file.indexOf(value) > -1) {
+										is_video = true;
+								}
+						});
 						var is_gif = (requested_file.indexOf(".gif") > -1);
 						// Act according to the file type
 						if (is_audio) {
+								console.log("Playing Audio");
 								// Hide the visual
 								$("#overlayImage").attr("width", "0%");
 								var currentAudio = $("#overlayAudio");
@@ -38,6 +55,7 @@ time = setInterval(function(){
 										$.get("http://127.0.0.1:5000/reset_state");
 								});
 						} else if (is_gif) {
+								console.log("Playing Gif");
 								// Show the gif
 								$("#overlayImage").attr("width", "100%");
 								// If gif
@@ -50,8 +68,10 @@ time = setInterval(function(){
 										$.get("http://127.0.0.1:5000/reset_state");
 								}, file_timeout);
 						} else if (is_image) {
+								console.log("Playing Image");
 								// TODO: Fill in for image files
 						} else if (is_video) {
+								console.log("Playing Video");
 								// TODO: Fill in for video files
 						} else {
 								console.log("ERROR: Unrecognized file type or could not determine file type");
