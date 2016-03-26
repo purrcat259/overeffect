@@ -43,12 +43,13 @@ def rebuild_filelist():
     return redirect(url_for('control_panel'))
 
 
-@app.route('/request/<new_state>/<new_file>/<time_out>')
-def request_state(new_state, new_file, time_out):
+@app.route('/request/<new_state>/<new_file>')
+def request_state(new_state, new_file):
     global state
     current_state = state.split(':')[0]
     if current_state == 'ready' or new_state in ['ready', 'interrupt']:
-        state = new_state + ':' + new_file + ':' + time_out
+        global files_data
+        state = new_state + ':' + new_file + ':' + str(return_file_data(new_file)['duration'])
         print('Entering new state: {}'.format(state))
     return redirect(url_for('control_panel'))
 
@@ -84,6 +85,11 @@ def reset_state():
 
 
 # File methods below here
+
+def return_file_data(file_name):
+    global files_data
+    return [file for file in files_data if file['full_name'] == file_name][0]
+
 
 def build_file_list():
     print('Building file list')
@@ -137,12 +143,12 @@ def return_audio_duration(audio_file):
             frames = file.getnframes()
             rate = file.getframerate()
             duration = round(frames / float(rate), 2);
-            print(audio_file + ' is ' + str(duration) + 's long')
+            print('\t' + audio_file + ' is ' + str(duration) + 's long')
         return duration
     elif extension == 'mp3':
         audio = MP3('./static/assets/' + audio_file)
         duration = round(audio.info.length, 2)
-        print(audio_file + ' is ' + str(duration) + 's long')
+        print('\t' + audio_file + ' is ' + str(duration) + 's long')
         return str(duration)
 
 
