@@ -12,7 +12,7 @@ time = setInterval(function(){
         if (state == "request") {
             var requested_file = split_string[1];
             var file_format = requested_file.split(".")[requested_file.split(".").length - 1];
-            var file_timeout = split_string[2] * 1000;
+            var file_timeout = parseFloat(split_string[2]) * 1000;
             // Set the state to busy
             console.log("Request received for: " + requested_file + " Going to busy state");
             var busy_url = "http://127.0.0.1:5000/set_busy_state/" + requested_file;
