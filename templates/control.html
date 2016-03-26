@@ -9,7 +9,7 @@
         <h2>Media</h2>
         {% for file in files_data %}
             <div class="row option-row">
-                <a href="{{ url_for('request_state', new_state='request', new_file=file.full_name, time_out=5) }}" class="btn btn-info">
+                <a href="{{ url_for('request_state', new_state='request', new_file=file.full_name) }}" class="btn btn-info">
                     <i class="fa fa-play fa-3x">&nbsp;  {{ file.full_name }}
                         <!-- Only print the duration if the file has one -->
                         {% if file.duration %}
